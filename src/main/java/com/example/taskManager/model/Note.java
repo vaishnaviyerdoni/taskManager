@@ -22,13 +22,14 @@ public class Note {
     @ManyToOne @JoinColumn(name="taskId")
     private Task task;
 
-    @JoinColumn(name="userId")
+    @ManyToOne @JoinColumn(name="userId")
     private User user;
 
     private String content;
     
     @Column(columnDefinition = "DATETIME2")
     private LocalDateTime createdAt;
+    
     
     //empty constructor
     public Note(){}

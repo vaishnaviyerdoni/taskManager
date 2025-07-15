@@ -16,15 +16,18 @@ public class User {
     private int userId;
 
     private String userName;
+    private String email;
     private String password;
+    
 
     //empty constructor
     public User(){}
     
     //constructor
-    public User(int userId, String userName, String password){
+    public User(int userId, String userName, String email, String password){
         this.userId = userId;
         this.userName = userName;
+        this.email = email;
         this.password = password;
     }
 }
