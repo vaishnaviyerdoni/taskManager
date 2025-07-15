@@ -3,7 +3,6 @@ package com.example.taskManager.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,7 +22,7 @@ public class Task {
     private int taskId;
 
     private String title;
-    private String description;
+    private String taskContent;
     
     @Column(columnDefinition = "DATETIME2")
     private LocalDateTime createdAt;
@@ -35,10 +34,10 @@ public class Task {
     public Task(){}
 
     //constructor
-    public Task(int taskId, String title, String description, LocalDateTime createdAt){
+    public Task(int taskId, String title, String taskContent, LocalDateTime createdAt){
         this.taskId = taskId;
         this.title = title;
-        this.description = description;
+        this.taskContent = taskContent;
         this.createdAt = createdAt;
     }
 }

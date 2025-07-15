@@ -22,6 +22,9 @@ public class Note {
     @ManyToOne @JoinColumn(name="taskId")
     private Task task;
 
+    @JoinColumn(name="userId")
+    private User user;
+
     private String content;
     
     @Column(columnDefinition = "DATETIME2")
@@ -31,9 +34,10 @@ public class Note {
     public Note(){}
 
     //constructor
-    public Note(int notesId, Task task, String content, LocalDateTime createdAt){
+    public Note(int notesId, Task task, User user, String content, LocalDateTime createdAt){
         this.notesId = notesId;
         this.task = task;
+        this.user = user;
         this.content = content;
         this.createdAt = createdAt;
     }
