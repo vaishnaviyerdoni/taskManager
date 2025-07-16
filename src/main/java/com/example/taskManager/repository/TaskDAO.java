@@ -1,6 +1,10 @@
 package com.example.taskManager.repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -44,6 +48,32 @@ public class TaskDAO {
         catch(Exception e){
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    //READ method: to fetch task information
+    public List<Task> getAllTasks(int userId) {
+        String sql = "SELECT * FROM Tasks WHERE userId = ?";
+        List<Task> tasks = new ArrayList<>();
+        try{    
+            tasks = jdbc.queryForList(
+                (rs, rowNum) -> {
+
+                    //To set foreign key
+                    userId = rs.getInt("userId");
+                    User user = new User();
+                    user.setUserId(userId);
+
+                    //to get other colums
+                    rs.getInt("taskId");
+                    user,
+                    rs
+                }
+            );
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return Collections.emptyList();
         }
     }
 } 
