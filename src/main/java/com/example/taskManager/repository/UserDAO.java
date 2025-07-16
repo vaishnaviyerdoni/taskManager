@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.example.taskManager.model.User;
 import java.sql.*;
+import java.util.*;
 
 @Repository
 public class UserDAO {
@@ -30,7 +31,7 @@ public class UserDAO {
                 return stmt;
             };
 
-            jdbc.update(sql, keyHolder);
+            jdbc.update(psc, keyHolder);
 
             if(keyHolder.getKey()!= null){
                 @SuppressWarnings("null")
@@ -46,4 +47,57 @@ public class UserDAO {
             return -1;
         }
     }
+
+    //READ methods: to get the information about tasks
+    public List<User> getAllUsers() {
+        String sql = "SELECT * FROM Users";
+        try{
+            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<User>) (rs, rowNum) ->
+            new User(
+                rs.getInt("userId"),
+                rs.getString("userName"),
+                rs.getString("email"),
+                rs.getString("password")));
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    public String getPasswordbyId(int userId) {
+        String sql = "SELECT password WHERE userId = ?";
+        try{
+            String password = jdbc.queryForObject(sql, 
+            (rs, rowNum) -> 
+                rs.getString("password"),
+                userId
+            );
+
+            return password;
+        }catch(Exception e){
+            e.printStackTrace();
+            return "Failed to fetch password";
+        }
+    }
+
+    public String getUsernameById(int userId) {
+        String sql = "SELECT userName WHERE userId = ?";
+        try{
+            String userName = jdbc.queryForObject(sql,
+                (rs, rowNum) -> 
+                    rs.getString("userName"),
+                    userId
+            );
+
+            return userName;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "Username not found";
+        }
+    }
+
+    //UPDATE methods : to update the user Information
+    
 }
