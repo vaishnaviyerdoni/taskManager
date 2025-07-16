@@ -160,4 +160,27 @@ public class UserDAO {
             return false;
         }
     }
+
+    //DELETE method : for user to delete their account
+    public boolean deleteAccount(int userId){
+        String sql = "DELETE FROM Users WHERE userId = ?";
+        try{
+            PreparedStatementCreator psc = (Connection conn) -> {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, userId);
+                return stmt;
+            };
+            int rows = jdbc.update(psc);
+            if(rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
