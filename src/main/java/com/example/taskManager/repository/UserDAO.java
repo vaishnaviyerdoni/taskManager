@@ -99,5 +99,27 @@ public class UserDAO {
     }
 
     //UPDATE methods : to update the user Information
-    
+    public boolean updatePasscode(int userId, String user_name, String newPassword){
+        String sql = "UPDATE password SET = ? WHERE userId = ?";
+        try{
+            PreparedStatementCreator psc = (Connection conn) -> {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, newPassword);
+                stmt.setInt(2, userId);
+                return stmt;
+            };
+
+            int rows = jdbc.update(psc);
+            if(rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
