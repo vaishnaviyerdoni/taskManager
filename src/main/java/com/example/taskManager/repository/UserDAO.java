@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import com.example.taskManager.Exceptions.UserNotfoundException;
 import com.example.taskManager.model.User;
 import java.sql.*;
 import java.util.*;
@@ -100,21 +102,57 @@ public class UserDAO {
 
     //UPDATE methods : to update the user Information
     public boolean updatePasscode(int userId, String user_name, String newPassword){
-        String sql = "UPDATE password SET = ? WHERE userId = ?";
+        String sql = "UPDATE Users SET password = ? WHERE userId = ?";
         try{
-            PreparedStatementCreator psc = (Connection conn) -> {
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, newPassword);
-                stmt.setInt(2, userId);
-                return stmt;
-            };
+            String name = getUsernameById(userId);
+            if(name.equals(user_name)){
+                    PreparedStatementCreator psc = (Connection conn) -> {
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, newPassword);
+                    stmt.setInt(2, userId);
+                    return stmt;
+                };
 
-            int rows = jdbc.update(psc);
-            if(rows > 0){
-                return true;
+                int rows = jdbc.update(psc);
+                if(rows > 0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
             else{
-                return false;
+                throw new UserNotfoundException("User not found for given username!");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateEmail(int userId, String user_name, String nEmail) {
+        String sql = "UPDATE Users SET email = ? WHERE userId = ?";
+        try{ 
+            String name = getUsernameById(userId);
+            if(name.equals(user_name)){
+                PreparedStatementCreator psc = (Connection conn) -> {
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, nEmail);
+                    stmt.setInt(2, userId);
+                    return stmt;
+                };
+
+                int rows = jdbc.update(psc);
+                if(rows > 0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                throw new UserNotfoundException("User for given username not found!");    
             }
         }
         catch(Exception e){
