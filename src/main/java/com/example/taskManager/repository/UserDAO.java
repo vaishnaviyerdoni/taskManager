@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
 import com.example.taskManager.Exceptions.UserNotfoundException;
 import com.example.taskManager.model.User;
 import java.sql.*;
