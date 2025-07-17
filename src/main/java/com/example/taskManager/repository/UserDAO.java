@@ -63,7 +63,7 @@ public class UserDAO {
         catch(Exception e){
             e.printStackTrace();
             return Collections.emptyList();
-        }
+        } 
     }
 
     public String getPasswordbyId(int userId) {

@@ -1,16 +1,14 @@
 package com.example.taskManager.repository;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import java.util.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.example.taskManager.model.Task;
+import com.example.taskManager.model.User;
 
 @Repository
 public class TaskDAO {
@@ -54,26 +52,55 @@ public class TaskDAO {
     //READ method: to fetch task information
     public List<Task> getAllTasks(int userId) {
         String sql = "SELECT * FROM Tasks WHERE userId = ?";
-        List<Task> tasks = new ArrayList<>();
         try{    
-            tasks = jdbc.queryForList(
-                (rs, rowNum) -> {
+            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<Task>)(rs, rowNum) -> {
+                //for foreign key
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
 
-                    //To set foreign key
-                    userId = rs.getInt("userId");
-                    User user = new User();
-                    user.setUserId(userId);
-
-                    //to get other colums
-                    rs.getInt("taskId");
+                //to get information
+                 return new Task(
+                    rs.getInt("taskId"),
                     user,
-                    rs
-                }
-            );
+                    rs.getString("title"),
+                    rs.getString("taskContent"),
+                    rs.getTimestamp("createdAt").toLocalDateTime());
+            });
         }
         catch(Exception e){
             e.printStackTrace();
             return Collections.emptyList();
+        }
+    }
+
+    public List<Task> getTaskbyID(int taskId){
+        String sql = "SELECT * FROM Tasks WHERE taskId = ?";
+        try{
+            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<Task>)(rs, rowNum) -> {
+                //foreign keys
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
+
+                return new Task(
+                    rs.getInt("taskId"),
+                    user,
+                    rs.getString("title"),
+                    rs.getString("taskContent"),
+                    rs.getTimestamp("createdAt").toLocalDateTime());
+            }, taskId);
+        }catch(Exception e){
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    public int getTaskIdbyTitle(String title) {
+        try{
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return -1;
         }
     }
 } 
