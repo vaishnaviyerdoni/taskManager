@@ -39,8 +39,9 @@ public class Task {
     public Task(){}
 
     //constructor
-    public Task(int taskId, String title, String taskContent, LocalDateTime createdAt){
+    public Task(int taskId, User user, String title, String taskContent, LocalDateTime createdAt){
         this.taskId = taskId;
+        this.user = user;
         this.title = title;
         this.taskContent = taskContent;
         this.createdAt = createdAt;
