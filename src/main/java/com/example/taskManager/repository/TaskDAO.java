@@ -94,13 +94,73 @@ public class TaskDAO {
         }
     }
 
-    public int getTaskIdbyTitle(String title) {
+    public int getTaskIdbyuserId(int userId) {
+        String sql = "SELECT taskId FROM tasks WHERE userId = ?";
         try{
+            Integer taskId = jdbc.queryForObject(sql, 
+            (rs, rowNum) -> rs.getInt("taskId"),
+            userId
+            );
 
+            if(taskId != null){
+                return taskId;
+            }
+            else{
+                return 0;
+            }
         }
         catch(Exception e){
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    //UPDATE method : to update the task
+    public boolean updateTask(String taskContent, int taskId) {
+        String sql = "UPDATE tasks SET taskContent = ? WHERE userId = ?";
+        try{
+            PreparedStatementCreator psc = (Connection conn) -> {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, taskContent);
+                stmt.setInt(2, taskId);
+                return stmt;
+            };
+
+            int rows = jdbc.update(sql);
+            if(rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //DELETE method: to delete the task
+    public boolean deleteTask(int taskId) {
+        String sql = "DELETE FROM tasks WHERE taskId = ?";
+        try{
+            PreparedStatementCreator psc = (Connection conn) -> {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, taskId );
+                return stmt;
+            };
+
+            int rows = jdbc.update(sql);
+            if(rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
         }
     }
 } 
