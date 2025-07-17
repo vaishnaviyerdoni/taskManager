@@ -11,6 +11,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.example.taskManager.model.Note;
+import com.example.taskManager.model.Task;
+import com.example.taskManager.model.User;
 
 @Repository
 public class NoteDAO{
@@ -55,11 +57,28 @@ public class NoteDAO{
     public List<Note> getNotebyTaskId(int taskId){
         String sql = "SELECT * FROM notes WHERE taskId = ?";
         try{
-            List mynotes = new ArrayList<>();
-            return mynotes;
+            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<Note>)(rs, rowNum) -> {
+                //foreign keys
+                Task task = new Task();
+                task.setTaskId(rs.getInt("taskId"));
+
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
+
+                return new Note(
+                    rs.getInt("notesId"),
+                    task,
+                    user,
+                    rs.getString("content"),
+                    rs.getTimestamp("createdAt").toLocalDateTime());
+            }, taskId);
         }catch(Exception e){
             e.printStackTrace();
             return Collections.emptyList();
         }
-    }    
+    }
+    
+    public List<Note> getNote(int notesId) {
+        String sql = "";
+    }
 }
