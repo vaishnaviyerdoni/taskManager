@@ -53,7 +53,7 @@ public class TaskDAO {
     public List<Task> getAllTasks(int userId) {
         String sql = "SELECT * FROM Tasks WHERE userId = ?";
         try{    
-            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<Task>)(rs, rowNum) -> {
+            return jdbc.query(sql, (rs, rowNum) -> {
                 //for foreign key
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
@@ -65,7 +65,7 @@ public class TaskDAO {
                     rs.getString("title"),
                     rs.getString("taskContent"),
                     rs.getTimestamp("createdAt").toLocalDateTime());
-            });
+            }, userId);
         }
         catch(Exception e){
             e.printStackTrace();
