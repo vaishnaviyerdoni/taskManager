@@ -2,7 +2,6 @@ package com.example.taskManager.service;
 
 import org.slf4j.*;
 import org.springframework.stereotype.Service;
-
 import com.example.taskManager.Exceptions.InvalidPasswordException;
 import com.example.taskManager.Exceptions.InvalidUserNameException;
 import com.example.taskManager.model.User;
