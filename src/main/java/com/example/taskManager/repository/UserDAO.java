@@ -70,6 +70,25 @@ public class UserDAO {
         } 
     }
 
+    public List<User> getUserInfo(int userId) {
+        String sql = "SELECT * FROM users WHERE userId =?";
+        try{
+            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<User>)(rs, rowNum) -> {
+            return new User(
+                rs.getInt("userId"),
+                rs.getString("userName"),
+                rs.getString("email"),
+                rs.getString("password")
+            );
+            }, userId);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            logger.error("Information cannot be fetched!", e);
+            return Collections.emptyList();
+        }
+    }
+
     public String getPasswordbyId(int userId) {
         String sql = "SELECT password FROM users WHERE userId = ?";
         try{
@@ -102,6 +121,42 @@ public class UserDAO {
             e.printStackTrace();
             logger.error("Failed to fetch the username", e);
             return "Username not found";
+        }
+    }
+
+    public String getEmail(int userId){
+        String sql = "SELECT email FROM users WHERE userId = ?";
+        try{
+            String email = jdbc.queryForObject(sql,
+            (rs, rowNum) -> 
+                rs.getString("email"),
+                userId
+            );
+
+            return email;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            logger.error("Failed to fetch email", e);
+            return "Email not found";
+        }
+    }
+
+    public int getUserIdbyUsername(String username){
+        String sql = "SELECT userId FROM users WHERE userName = ?";
+        try{
+            @SuppressWarnings("null")
+            int userId = jdbc.queryForObject(sql, 
+            (rs, rowNum) -> 
+                rs.getInt("userId"),
+                username
+            );
+            return userId;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            logger.error("Failed to fetch userId", e);
+            return -1;
         }
     }
 
