@@ -9,10 +9,12 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.example.taskManager.model.Task;
 import com.example.taskManager.model.User;
+import org.slf4j.*;
 
 @Repository
 public class TaskDAO {
     private final JdbcTemplate jdbc;
+    private static final Logger logger = LoggerFactory.getLogger(TaskDAO.class);
     //constructor
     public TaskDAO(JdbcTemplate jdbc){
         this.jdbc = jdbc;
@@ -44,6 +46,7 @@ public class TaskDAO {
             }
         }
         catch(Exception e){
+            logger.error("Could not add Task", e);
             e.printStackTrace();
             return -1;
         }
@@ -69,6 +72,7 @@ public class TaskDAO {
         }
         catch(Exception e){
             e.printStackTrace();
+            logger.error("Could not fetch task information", e);
             return Collections.emptyList();
         }
     }
@@ -90,6 +94,7 @@ public class TaskDAO {
             }, taskId);
         }catch(Exception e){
             e.printStackTrace();
+            logger.error("Could not fetch the task information", e);
             return Collections.emptyList();
         }
     }
@@ -110,6 +115,7 @@ public class TaskDAO {
             }
         }
         catch(Exception e){
+            logger.error("Could not fetch the taskId ", e);
             e.printStackTrace();
             return -1;
         }
@@ -126,7 +132,7 @@ public class TaskDAO {
                 return stmt;
             };
 
-            int rows = jdbc.update(sql);
+            int rows = jdbc.update(psc);
             if(rows > 0){
                 return true;
             }
@@ -135,6 +141,7 @@ public class TaskDAO {
             }
         }
         catch(Exception e){
+            logger.error("Failed to update the task", e);
             e.printStackTrace();
             return false;
         }
@@ -150,7 +157,7 @@ public class TaskDAO {
                 return stmt;
             };
 
-            int rows = jdbc.update(sql);
+            int rows = jdbc.update(psc);
             if(rows > 0){
                 return true;
             }
@@ -159,6 +166,7 @@ public class TaskDAO {
             }
         }
         catch(Exception e){
+            logger.error("Failed to delete the task", e);
             e.printStackTrace();
             return false;
         }

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.*;
+import org.slf4j.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -16,6 +17,7 @@ import com.example.taskManager.model.User;
 
 @Repository
 public class NoteDAO{
+    private static final Logger logger = LoggerFactory.getLogger(NoteDAO.class);
     private JdbcTemplate jdbc;
 
     //constructor
@@ -48,6 +50,7 @@ public class NoteDAO{
             }
         }
         catch(Exception e){
+            logger.error("Failed to add the note",e);
             e.printStackTrace();
             return -1;
         }
@@ -74,6 +77,7 @@ public class NoteDAO{
             }, taskId);
         }catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to retrieve the data about notes", e);
             return Collections.emptyList();
         }
     }
@@ -94,19 +98,20 @@ public class NoteDAO{
                     rs.getInt("notesId"),
                     task,
                     user,
-                    rs.getString("title"),
+                    rs.getString("content"),
                     rs.getTimestamp("createdAt").toLocalDateTime());
             }, notesId);
         }
         catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to get note information", e);
             return Collections.emptyList();
         }
     }
 
     //UPDATE method: to update the note for a specfic task
     public boolean updateNotes(int notesId, String content) {
-        String sql = "UPDATE notes SET content = ? WHERE notesId = ";
+        String sql = "UPDATE notes SET content = ? WHERE notesId = ?";
         try{
             PreparedStatementCreator psc = (Connection conn) -> {
                 PreparedStatement stmt = conn.prepareStatement(sql);
@@ -125,6 +130,7 @@ public class NoteDAO{
         }
         catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to update the note information", e);
             return false;
         }
     }
@@ -148,6 +154,7 @@ public class NoteDAO{
             }
         }
         catch(Exception e){
+            logger.error("Failed to delete the note", e);
             e.printStackTrace();
             return false;
         }

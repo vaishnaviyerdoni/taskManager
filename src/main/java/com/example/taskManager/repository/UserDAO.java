@@ -1,5 +1,6 @@
 package com.example.taskManager.repository;
 
+import org.slf4j.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -12,6 +13,7 @@ import java.util.*;
 
 @Repository
 public class UserDAO {
+    private static final Logger logger = LoggerFactory.getLogger(UserDAO.class);
     private final JdbcTemplate jdbc;
     //constructor
     public UserDAO(JdbcTemplate jdbc){
@@ -45,6 +47,7 @@ public class UserDAO {
         }
         catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to register the User", e);
             return -1;
         }
     }
@@ -62,12 +65,13 @@ public class UserDAO {
         }
         catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to retrieve all the user information", e);
             return Collections.emptyList();
         } 
     }
 
     public String getPasswordbyId(int userId) {
-        String sql = "SELECT password WHERE userId = ?";
+        String sql = "SELECT password FROM users WHERE userId = ?";
         try{
             String password = jdbc.queryForObject(sql, 
             (rs, rowNum) -> 
@@ -78,12 +82,13 @@ public class UserDAO {
             return password;
         }catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to fetch the errors", e);
             return "Failed to fetch password";
         }
     }
 
     public String getUsernameById(int userId) {
-        String sql = "SELECT userName WHERE userId = ?";
+        String sql = "SELECT userName FROM users WHERE userId = ?";
         try{
             String userName = jdbc.queryForObject(sql,
                 (rs, rowNum) -> 
@@ -95,6 +100,7 @@ public class UserDAO {
         }
         catch(Exception e){
             e.printStackTrace();
+            logger.error("Failed to fetch the username", e);
             return "Username not found";
         }
     }
@@ -125,6 +131,7 @@ public class UserDAO {
             }
         }
         catch(Exception e){
+            logger.error("Failed to update the passcode", e);
             e.printStackTrace();
             return false;
         }
@@ -155,6 +162,7 @@ public class UserDAO {
             }
         }
         catch(Exception e){
+            logger.error("Failed to update the Email", e);
             e.printStackTrace();
             return false;
         }
@@ -178,6 +186,7 @@ public class UserDAO {
             }
         }
         catch(Exception e){
+            logger.error("Failed to delete the user information", e);
             e.printStackTrace();
             return false;
         }
