@@ -79,6 +79,78 @@ public class NoteDAO{
     }
     
     public List<Note> getNote(int notesId) {
-        String sql = "";
+        String sql = "SELECT * FROM notes WHERE notesId = ?";
+        try{
+            return jdbc.query(sql, (org.springframework.jdbc.core.RowMapper<Note>)(rs, rowNum) -> {
+                //foreign key
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
+
+                Task task = new Task();
+                task.setTaskId(rs.getInt("taskId"));
+
+                //other params
+                return new Note(
+                    rs.getInt("notesId"),
+                    task,
+                    user,
+                    rs.getString("title"),
+                    rs.getTimestamp("createdAt").toLocalDateTime());
+            }, notesId);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
+
+    //UPDATE method: to update the note for a specfic task
+    public boolean updateNotes(int notesId, String content) {
+        String sql = "UPDATE notes SET content = ? WHERE notesId = ";
+        try{
+            PreparedStatementCreator psc = (Connection conn) -> {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, content);
+                stmt.setInt(2, notesId);
+                return stmt;
+            };
+
+            int rows = jdbc.update(psc);
+            if(rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //DELETE method : to delete the note for the notesId
+    public boolean deleteNote(int notesId){
+        String sql = "DELETE FROM notes WHERE notesId = ?";
+        try{
+            PreparedStatementCreator psc = (Connection conn) -> {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, notesId);
+                return stmt;
+            };
+
+            int rows = jdbc.update(sql);
+            if(rows > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
 }
