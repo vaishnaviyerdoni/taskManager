@@ -9,6 +9,10 @@ import com.example.taskManager.repository.NoteDAO;
 import com.example.taskManager.repository.TaskDAO;
 import com.example.taskManager.repository.UserDAO;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.*;
 
 @Service
@@ -53,8 +57,62 @@ public class NoteBusiness {
     }
 
     //for a given task, get all its notes
+    public List<Note> getMyNotes(int userId, int taskId, String userName){
+        List<Note> notes = new ArrayList<>();
+        try{
+            int userID = userDAO.getUserIdbyUsername(userName);
+            int taskID = taskDAO.getTaskIdbyuserId(userID);
+            if(userID == userId && taskID == taskId){
+                notes = noteDAO.getNotebyTaskId(taskID);
+                return notes;
+            }
+            else{
+                throw new UserNotfoundException("User for given user name was found");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            logger.error("Error occurred when fetching information", e);
+            return Collections.emptyList();
+        }
+    }
 
     //update the note for that taskId
+    public boolean updateMyNote(int userId, int taskId, String userName, String content){
+        try{
+            int userID = userDAO.getUserIdbyUsername(userName);
+            int taskID = taskDAO.getTaskIdbyuserId(userID);
+            if(taskId == taskID && userID == userId){
+                boolean isUpdated = noteDAO.updateNotes(taskID, content);
+                return isUpdated;
+            }
+            else{
+                throw new UserNotfoundException("User for given userID is not available");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            logger.error("Error occurred when updating note", e);
+            return false;
+        }
+    }
 
     //delete a note for the task
+    public boolean deleteMyNote(int userId, int taskId, String userName){
+        try{
+            int userID = userDAO.getUserIdbyUsername(userName);
+            int taskID = taskDAO.getTaskIdbyuserId(userID);
+            if(taskID == taskId && userID == userId){
+                return noteDAO.deleteNote(taskID);
+            }
+            else{
+                throw new UserNotfoundException("User for this userID was unavailable");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            logger.error("Error occurred while deleting note", e);
+            return false;
+        }
+    }
 }
