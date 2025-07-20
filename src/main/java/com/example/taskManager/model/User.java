@@ -1,5 +1,7 @@
 package com.example.taskManager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,6 +19,8 @@ public class User {
 
     private String userName;
     private String email;
+    
+    @JsonIgnore
     private String password;
     
 

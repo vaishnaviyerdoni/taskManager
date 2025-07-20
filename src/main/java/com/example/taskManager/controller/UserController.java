@@ -1,8 +1,30 @@
 package com.example.taskManager.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.example.taskManager.service.UserBusiness;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import com.example.taskManager.model.User;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
+    private UserBusiness userBusiness;
+
+    public UserController(UserBusiness userBusiness){
+        this.userBusiness = userBusiness;
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<User> getMethodName(@PathVariable int userId, @RequestParam String userName) {
+        try{
+            return userBusiness.getMyInfo(userId, userName);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    
     
 }
