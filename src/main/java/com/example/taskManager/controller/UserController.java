@@ -4,6 +4,9 @@ import com.example.taskManager.service.UserBusiness;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.example.taskManager.model.User;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api")
@@ -15,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<User> getMethodName(@PathVariable int userId, @RequestParam String userName) {
+    public List<User> getUser(@PathVariable int userId, @RequestParam String userName) {
         try{
             return userBusiness.getMyInfo(userId, userName);
         }
@@ -24,7 +27,4 @@ public class UserController {
             return Collections.emptyList();
         }
     }
-
-    
-    
 }
