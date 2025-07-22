@@ -4,6 +4,7 @@ import org.slf4j.*;
 import org.springframework.stereotype.Service;
 
 import com.example.taskManager.DTO.UserDTO.AddUser;
+import com.example.taskManager.DTO.UserDTO.Login;
 import com.example.taskManager.Exceptions.InvalidPasswordException;
 import com.example.taskManager.Exceptions.InvalidUserNameException;
 import com.example.taskManager.model.User;
@@ -113,8 +114,13 @@ public class UserBusiness {
     }
 
     //user login authentication
-    public boolean isValidUser(int userId, String password, String email, String userName) {
+    public boolean isValidUser(Login login) {
         try{
+            int userId = login.getUserId();
+            String userName = login.getUserName();
+            String password = login.getPassword();
+            String email = login.getEmail();
+
             String passcode = userDAO.getPasswordbyId(userId);
             int userID = userDAO.getUserIdbyUsername(userName);
             String user_name = userDAO.getUsernameById(userID);
