@@ -32,7 +32,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user")
+    @PostMapping("/user/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody AddUser addUser) {
         try{
             int userId = userBusiness.addUsertoDb(addUser);
@@ -50,7 +50,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user")
+    @PostMapping("/user/login")
     public ResponseEntity<String> loginValidation(@RequestBody Login login) {
         try{
             boolean isValid = userBusiness.isValidUser(login);
@@ -67,7 +67,7 @@ public class UserController {
        }
     }
     
-    @PutMapping("user/{userId}")
+    @PutMapping("user/{userId}/email")
     public ResponseEntity<String> updateMyEmail(@PathVariable int userId, @RequestBody EmailUpdate email) {
         try{
             boolean isUpdated = userBusiness.updateUserEmail(userId, email);
@@ -84,7 +84,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("user/{userId}")
+    @PutMapping("user/{userId}/password")
     public ResponseEntity<String> updateMypassword(@PathVariable int userId, @RequestBody PasswordUpdate password) {
         try{
             boolean isUpdated = userBusiness.updatePasscode(userId, password);
@@ -101,4 +101,20 @@ public class UserController {
         }
     }
     
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<String> deleteAccount(@PathVariable int userId, @RequestParam String userName, @RequestParam String password){
+        try{
+            boolean isDeleted = userBusiness.deleteMyaccount(userId, userName, password);
+            if(isDeleted){
+                return ResponseEntity.ok("Account Deleted");
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Deleted");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Delete Account!");
+        }
+    }
 }
