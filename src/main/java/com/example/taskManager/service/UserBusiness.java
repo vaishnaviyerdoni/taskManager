@@ -4,7 +4,9 @@ import org.slf4j.*;
 import org.springframework.stereotype.Service;
 
 import com.example.taskManager.DTO.UserDTO.AddUser;
+import com.example.taskManager.DTO.UserDTO.EmailUpdate;
 import com.example.taskManager.DTO.UserDTO.Login;
+import com.example.taskManager.DTO.UserDTO.PasswordUpdate;
 import com.example.taskManager.Exceptions.InvalidPasswordException;
 import com.example.taskManager.Exceptions.InvalidUserNameException;
 import com.example.taskManager.model.User;
@@ -56,8 +58,11 @@ public class UserBusiness {
     }
 
     //update the password and email
-    public boolean updatePasscode(String userName, String password, int userId) {
+    public boolean updatePasscode(int userId, PasswordUpdate update) {
         try{
+            String userName = update.getUserName();
+            String password = update.getPassword();
+            
             String user_name = userDAO.getUsernameById(userId);
             int userID = userDAO.getUserIdbyUsername(user_name);
             if(user_name.equals(userName) && userID == userId){
@@ -74,8 +79,11 @@ public class UserBusiness {
         }
     }
 
-    public boolean updateUserEmail(String userName, String email, int userId) {
+    public boolean updateUserEmail(int userId, EmailUpdate update) {
         try{
+            String userName = update.getUserName();
+            String email = update.getEmail();
+
             String user_name = userDAO.getUsernameById(userId);
             int userID = userDAO.getUserIdbyUsername(userName);
             if (user_name.equals(userName) && userID == userId){

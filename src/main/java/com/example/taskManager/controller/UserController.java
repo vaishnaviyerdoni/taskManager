@@ -5,12 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-import com.example.taskManager.DTO.UserDTO.AddUser;
-import com.example.taskManager.DTO.UserDTO.Login;
-import com.example.taskManager.DTO.UserDTO.UserResponse;
+import com.example.taskManager.DTO.UserDTO.*;
 import com.example.taskManager.model.User;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
@@ -68,6 +67,38 @@ public class UserController {
        }
     }
     
-    
+    @PutMapping("user/{userId}")
+    public ResponseEntity<String> updateMyEmail(@PathVariable int userId, @RequestBody EmailUpdate email) {
+        try{
+            boolean isUpdated = userBusiness.updateUserEmail(userId, email);
+            if(isUpdated){
+                return ResponseEntity.ok("Email Updated!");
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update Email!");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update Email!");
+        }
+    }
+
+    @PutMapping("user/{userId}")
+    public ResponseEntity<String> updateMypassword(@PathVariable int userId, @RequestBody PasswordUpdate password) {
+        try{
+            boolean isUpdated = userBusiness.updatePasscode(userId, password);
+            if(isUpdated){
+                return ResponseEntity.ok("Password updated!");
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update Password");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update Password");
+        }
+    }
     
 }
