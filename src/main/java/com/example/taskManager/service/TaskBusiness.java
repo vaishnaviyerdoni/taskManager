@@ -47,7 +47,7 @@ public class TaskBusiness {
     }
 
     //Get all tasks
-    public List<Task> getMyTasks(int userId, int taskId, String userName) {
+    public List<Task> getMyTasks(int userId, String userName) {
         List<Task> tasks = new ArrayList<>();
         try{
             int userID = userDAO.getUserIdbyUsername(userName);

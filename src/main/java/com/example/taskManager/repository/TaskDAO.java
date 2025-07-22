@@ -123,7 +123,7 @@ public class TaskDAO {
 
     //UPDATE method : to update the task
     public boolean updateTask(String taskContent, int taskId) {
-        String sql = "UPDATE tasks SET taskContent = ? WHERE userId = ?";
+        String sql = "UPDATE tasks SET taskContent = ? WHERE taskId = ?";
         try{
             PreparedStatementCreator psc = (Connection conn) -> {
                 PreparedStatement stmt = conn.prepareStatement(sql);
