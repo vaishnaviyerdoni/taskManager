@@ -1,15 +1,15 @@
 package com.example.taskManager.controller;
 
 import com.example.taskManager.service.UserBusiness;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+
+import com.example.taskManager.DTO.UserDTO.AddUser;
+import com.example.taskManager.DTO.UserDTO.UserResponse;
 import com.example.taskManager.model.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @RestController
 @RequestMapping("/api")
@@ -31,10 +31,22 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user/{}")
-    public String postMethodName(@RequestBody String entity) {
-        
-        return entity;
+    @PostMapping("/user")
+    public ResponseEntity<UserResponse> registerUser(@RequestBody AddUser addUser) {
+        try{
+            int userId = userBusiness.addUsertoDb(addUser);
+            UserResponse res = new UserResponse(userId, "User Resgistered Successfully");
+            if (userId > 0){
+                return ResponseEntity.ok(res);
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new UserResponse(-1, "Registration Failed"));
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new UserResponse(-1, "Registration Failed"));
+        }
     }
     
 }

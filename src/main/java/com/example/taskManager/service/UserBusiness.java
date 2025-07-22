@@ -2,6 +2,8 @@ package com.example.taskManager.service;
 
 import org.slf4j.*;
 import org.springframework.stereotype.Service;
+
+import com.example.taskManager.DTO.UserDTO.AddUser;
 import com.example.taskManager.Exceptions.InvalidPasswordException;
 import com.example.taskManager.Exceptions.InvalidUserNameException;
 import com.example.taskManager.model.User;
@@ -18,9 +20,13 @@ public class UserBusiness {
     }
 
     //Register as User
-    public int addUser(int userId, String userName, String email, String password) {
+    public int addUsertoDb(AddUser addUser) {
         try{
-            User user = new User(userId, userName, email, password);
+            String userName = addUser.getUserName();
+            String email = addUser.getEmail();
+            String password = addUser.getPassword();
+
+            User user = new User(0, userName, email, password);
             int user_id = userDAO.registerUser(user);
             return user_id;
         }
