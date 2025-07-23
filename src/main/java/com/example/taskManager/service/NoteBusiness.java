@@ -1,6 +1,9 @@
 package com.example.taskManager.service;
 
 import org.springframework.stereotype.Service;
+
+import com.example.taskManager.DTO.NoteDTO.AddNote;
+import com.example.taskManager.DTO.NoteDTO.UpdateNote;
 import com.example.taskManager.Exceptions.UserNotfoundException;
 import com.example.taskManager.model.Note;
 import com.example.taskManager.model.Task;
@@ -28,8 +31,13 @@ public class NoteBusiness {
     }
 
     //Add a note to task
-    public int addNoteMytask(int notesId, int taskId, int userId, String content, LocalDateTime createdAt, String userName) {
+    public int addNoteMytask(AddNote note, String userName) {
         try{
+            int userId = note.getUserId();
+            int taskId = note.getTaskId();
+            String content = note.getContent();
+            LocalDateTime createdAt = note.getCreatedAt();
+
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);
 
@@ -40,9 +48,8 @@ public class NoteBusiness {
                 User user = new User();
                 user.setUserId(userID);
 
-                Note note = new Note(notesId, task, user, content, createdAt);
-                int notesID = noteDAO.addNote(note);
-                return notesId;
+                Note MyNote = new Note(0, task, user, content, createdAt);
+                return noteDAO.addNote(MyNote);
             }
             else{
                 throw new UserNotfoundException("User for the given userName not found");
@@ -77,8 +84,13 @@ public class NoteBusiness {
     }
 
     //update the note for that taskId
-    public boolean updateMyNote(int userId, int taskId, String userName, String content, int notesId){
+    public boolean updateMyNote(UpdateNote noteContent, int notesId){
         try{
+            String userName = noteContent.getUserName();
+            String content = noteContent.getContent();
+            int taskId = noteContent.getTaskId();
+            int userId = noteContent.getUserId();
+
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);
             if(taskId == taskID && userID == userId){
