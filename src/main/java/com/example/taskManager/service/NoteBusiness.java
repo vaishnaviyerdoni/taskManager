@@ -77,12 +77,12 @@ public class NoteBusiness {
     }
 
     //update the note for that taskId
-    public boolean updateMyNote(int userId, int taskId, String userName, String content){
+    public boolean updateMyNote(int userId, int taskId, String userName, String content, int notesId){
         try{
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);
             if(taskId == taskID && userID == userId){
-                boolean isUpdated = noteDAO.updateNotes(taskID, content);
+                boolean isUpdated = noteDAO.updateNotes(notesId, content);
                 return isUpdated;
             }
             else{
@@ -97,12 +97,12 @@ public class NoteBusiness {
     }
 
     //delete a note for the task
-    public boolean deleteMyNote(int userId, int taskId, String userName){
+    public boolean deleteMyNote(int userId, int taskId, String userName, int notesId){
         try{
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);
             if(taskID == taskId && userID == userId){
-                return noteDAO.deleteNote(taskID);
+                return noteDAO.deleteNote(notesId);
             }
             else{
                 throw new UserNotfoundException("User for this userID was unavailable");
