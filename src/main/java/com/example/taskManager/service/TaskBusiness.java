@@ -1,6 +1,9 @@
 package com.example.taskManager.service;
 
 import org.springframework.stereotype.Service;
+
+import com.example.taskManager.DTO.TaskDTO.AddTask;
+import com.example.taskManager.DTO.TaskDTO.TaskUpdate;
 import com.example.taskManager.Exceptions.UserNotfoundException;
 import com.example.taskManager.model.Task;
 import com.example.taskManager.model.User;
@@ -23,10 +26,16 @@ public class TaskBusiness {
     }
 
     //Add Task to Task manager
-    public int addTasktoManager(int taskId, int userId, String title, String taskContent, LocalDateTime createdAt, String userName) {
+    public int addTasktoManager(AddTask tasks) {
         int userID = 0;
         int taskID = 0;
         try{
+            int userId = tasks.getUserId();
+            String userName = tasks.getUserName();
+            String title = tasks.getTitle();
+            String taskContent = tasks.getTaskContent();
+            LocalDateTime createdAt = tasks.getCreatedAt();
+
             userID = userDAO.getUserIdbyUsername(userName);
             User user = new User();
             if(userID == userId){
@@ -88,8 +97,12 @@ public class TaskBusiness {
     }
 
     //update the task Content(task Content is actual task body)
-    public boolean updateTask(String newContent, int taskId, int userId, String userName){
+    public boolean updateTask(int taskId, TaskUpdate task){
         try{
+            String userName = task.getUserName();
+            int userId = task.getUserId();
+            String newContent = task.getNContent();
+
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);
 
