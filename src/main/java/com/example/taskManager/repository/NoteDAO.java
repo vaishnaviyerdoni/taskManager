@@ -26,7 +26,7 @@ public class NoteDAO{
     }
     
     //CREATE method: to add a note to a task
-    public int addNote(int taskId, Note note){
+    public int addNote(Note note){
         String sql = "INSERT INTO notes (taskId, userId, content, createdAt) VALUES (?,?,?,?)";
         try{
             KeyHolder keyHolder = new GeneratedKeyHolder();

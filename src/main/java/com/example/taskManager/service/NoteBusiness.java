@@ -41,7 +41,7 @@ public class NoteBusiness {
                 user.setUserId(userID);
 
                 Note note = new Note(notesId, task, user, content, createdAt);
-                int notesID = noteDAO.addNote(taskID, note);
+                int notesID = noteDAO.addNote(note);
                 return notesId;
             }
             else{
