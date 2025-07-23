@@ -28,7 +28,7 @@ public class TaskController {
         this.taskBusiness = taskBusiness;
     }
 
-    @GetMapping("task/{userId}")
+    @GetMapping("/task/{userId}")
     public List<Task> getTask(@PathVariable int userId, @RequestParam String userName) {
         try{
             return taskBusiness.getMyTasks(userId, userName);
@@ -57,7 +57,7 @@ public class TaskController {
         }    
     }
     
-    @PutMapping("/task/{TaskId}")
+    @PutMapping("/task/{taskId}")
     public ResponseEntity<String> putMethodName(@PathVariable int taskId, @RequestBody TaskUpdate task) {
         try{
             boolean isUpdated = taskBusiness.updateTask(taskId, task);
