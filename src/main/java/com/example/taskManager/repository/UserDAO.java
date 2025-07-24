@@ -29,8 +29,8 @@ public class UserDAO {
             PreparedStatementCreator psc = (Connection conn) -> {
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, user.getUserName());
-                stmt.setString(2, user.getPassword());
-                stmt.setString(3, user.getEmail());
+                stmt.setString(2, user.getEmail());
+                stmt.setString(3, user.getPassword());
                 return stmt;
             };
 

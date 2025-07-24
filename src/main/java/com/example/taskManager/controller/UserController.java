@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.example.taskManager.DTO.UserDTO.*;
 import com.example.taskManager.model.User;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api")
@@ -36,6 +33,10 @@ public class UserController {
         try{
             int userId = userBusiness.addUsertoDb(addUser);
             UserResponse res = new UserResponse(userId, "User Resgistered Successfully");
+            System.out.println("Received: " + addUser.getUserName());
+            System.out.println("Email: " + addUser.getEmail());
+            System.out.println("Password: " + addUser.getPassword());
+
             if (userId > 0){
                 return ResponseEntity.ok(res);
             }

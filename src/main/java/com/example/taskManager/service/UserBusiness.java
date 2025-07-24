@@ -29,6 +29,7 @@ public class UserBusiness {
             String email = addUser.getEmail();
             String password = addUser.getPassword();
 
+            
             User user = new User(0, userName, email, password);
             int user_id = userDAO.registerUser(user);
             return user_id;
