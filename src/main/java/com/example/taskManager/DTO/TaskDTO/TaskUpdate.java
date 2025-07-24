@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter@Getter
 
 public class TaskUpdate {
-    private String nContent;
+    private String taskContent;
     private String userName;
     private int userId;
 }

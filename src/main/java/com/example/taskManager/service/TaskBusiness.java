@@ -101,7 +101,7 @@ public class TaskBusiness {
         try{
             String userName = task.getUserName();
             int userId = task.getUserId();
-            String newContent = task.getNContent();
+            String newContent = task.getTaskContent();
 
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);
