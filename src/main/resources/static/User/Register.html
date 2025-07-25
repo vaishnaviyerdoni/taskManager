@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>User Registration</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <header>
+        <h1>Welcome</h1>
+        <h2> Register here!</h2>
+    </header>
+      <main class="taskManager">
+        <form id="registrationForm" method="post" action="/user/register">
+            <div class="inputAlignment">
+                <label for="userName">User name:</label>
+                <input type="text" id="userName" required>
+            </div>
+
+            <div class="inputAlignment">
+                <label for="password">Password:</label>
+                <input type="text" id="password" required>
+            </div>
+
+            <div class="inputAlignment">
+                <label for="email">Email:</label>
+                <input type="text" id="email" required>
+            </div>
+
+            <button type="submit">Register</button>
+            <p id="registerMessage"></p>
+        </form>
+      </main>
+
+      <p id="afterRegisterOrLogin">After registering, login here! <a href="Login.html">Login</a></p>
+        <script src=""></script>
+    </body>
+</html>

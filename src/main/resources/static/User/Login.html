@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>Login here</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Task Manager</h1>
+            <h2>Login here</h2>
+        </header>
+        <main class="taskManager"> 
+            <form id="loginForm" method="post" action="/user/login">
+                <input type="hidden" name="userID" value="userId"> <!---Take it from localStorage-->
+
+                <label for="userName">User name:</label>
+                <input type="text" id="userName" required><br><br>
+
+                <label for="password">Password:</label>
+                <input type="text" id="password" required><br><br>
+
+                <label for="email">Email</label>
+                <input type="text" id="email" required>
+
+                <button type="submit">Login</button>
+                <p id="loginMessage"></p>
+            </form>
+        </main>
+        <p id="afterRegisterOrLogin">If not registered, Register here: <a href="Register.html">Register here!</a></p>
+        <script src=""></script>
+    </body>
+</html>
