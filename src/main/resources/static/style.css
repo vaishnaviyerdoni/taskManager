@@ -1,38 +1,30 @@
-h1{
-    display: flex;
-    flex-direction: column;
-    color:black;
-    margin-bottom: 50px;
-    border: 2px solid rgb(5, 86, 93);
-    align-items: center;
-    background-color:cadetblue;
-    justify-content: center;
-}
-
-h2{
-    display: flex;
-    flex-direction: column;
-    color:black;
-    margin-bottom: 50px;
-    border : 2px solid rgb(5, 85, 93);
-    align-items: center;
-    justify-content: center;
+h1, h2, p#afterRegisterOrLogin {
+    color: black;
+    border:2px solid rgb(5, 85, 93);
     background-color: cadetblue;
+     max-width: 400px;       /* Or whatever width matches your form */
+    margin: 20px auto;      /* Auto left-right centers it */
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;    /* Optional: for rounded header box */
+    justify-content: center;
+    margin-top: 20px;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+body, html {
     font-family: 'Times New Roman', Times, sans-serif;
     background-image: url('/Image/fernando-hernandez-rLkZVjaqW2o-unsplash.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border: 4px solid rgb(5, 85, 93);
+    text-align: center;
+    height:100%;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
+
 
 form{
     background-color:cadetblue;
@@ -41,20 +33,14 @@ form{
     border-radius: 10px;
     max-width: 400px;
     border: 2px solid rgb(5, 86, 93);
+    margin:auto;
 }
 
 label{
     font-size: large;
     color:black;
     font-weight: bold;
-}
-
-p#afterRegisterOrLogin{
-    color:black;
-    font-size: large;
-    border: 2px solid rgb(5, 85, 93);
-    background-color: cadetblue;
-    font-weight: bold;
+    width: 100px;
 }
 
 input[type="button"]:hover{
@@ -88,8 +74,29 @@ button{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 50px;
     margin:5px;
     gap:10px
 
+}
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Vertically center */
+  align-items: center;       /* Horizontally center */
+  min-height: 100vh;         /* Ensure full screen height */
+  gap: 20px;                 /* Spacing between items */
+}
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* nice spacing between form and paragraph */
+}
+
+#afterRegisterOrLogin {
+    margin: 0; /* remove weird spacing */
+    font-weight: bold;
+    color: black;
 }

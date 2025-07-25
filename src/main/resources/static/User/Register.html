@@ -6,12 +6,11 @@
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-        <header>
+        <div class="pageWrapper">
         <h1>Welcome</h1>
         <h2> Register here!</h2>
-    </header>
-      <main class="taskManager">
-        <form id="registrationForm" method="post" action="/user/register">
+        <div class="formWrapper">
+            <form id="registrationForm" method="post" action="/user/register">
             <div class="inputAlignment">
                 <label for="userName">User name:</label>
                 <input type="text" id="userName" required>
@@ -30,9 +29,9 @@
             <button type="submit">Register</button>
             <p id="registerMessage"></p>
         </form>
-      </main>
-
-      <p id="afterRegisterOrLogin">After registering, login here! <a href="Login.html">Login</a></p>
+        </div>
+        <p id="afterRegisterOrLogin">After registering, login here! <a href="Login.html">Login</a></p>
         <script src=""></script>
+        </div>
     </body>
 </html>
