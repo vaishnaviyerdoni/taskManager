@@ -145,7 +145,7 @@ public class NoteDAO{
                 return stmt;
             };
 
-            int rows = jdbc.update(sql);
+            int rows = jdbc.update(psc);
             if(rows > 0){
                 return true;
             }
