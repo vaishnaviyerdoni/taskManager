@@ -1,8 +1,8 @@
-h1, h2, p#afterRegisterOrLogin, p#forLogout {
+h1, h2, h4,p#afterRegisterOrLogin, p#forLogout {
     color: black;
     border:2px solid rgb(5, 85, 93);
     background-color: cadetblue;
-     max-width: 400px;       /* Or whatever width matches your form */
+    max-width: 400px;       /* Or whatever width matches your form */
     margin: 20px auto;      /* Auto left-right centers it */
     padding: 10px;
     text-align: center;
@@ -100,3 +100,28 @@ button{
     font-weight: bold;
     color: black;
 }
+
+.top-right-button{
+    position: fixed;
+    border:2px solid rgb(5, 85, 93);
+    border-radius: 10px;
+    z-index: 1000;
+    color: black;
+    top:15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.top-right-button:hover{
+    background-color:lightseagreen;
+}
+#logout {
+    top: 60px;
+    right: 15px;
+}
+
+#dashboard {
+    top: 15px;
+    right: 15px;
+}
+
