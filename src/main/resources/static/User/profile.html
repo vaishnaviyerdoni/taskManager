@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User profile</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <div class="pageWrapper">
+            <header>
+                <h1>Task Manager</h1>
+                <h2>Your Profile</h2>
+            </header>
+            <main class="taskManager">
+                <form id="updatePassword" action="/user/{userId}/password">
+                    <h4>Update Password</h4>
+                    <input type="hidden" name="userId" value="userId">
+
+                    <div class="inputAlignment">
+                        <label for="userNameForPassword">User Name:</label>
+                        <input type="text" id="userNameForPassword" required>
+                    </div>
+
+                    <div class="inputAlignment">
+                        <label for="passwordUpdate">Password:</label>
+                        <input type="text" id="passwordUpdate" required>
+                    </div>
+
+                    <button type="submit">Update</button>
+                    <p id="updatePasswordMessage"></p>
+                </form>
+
+                <form id="updateEmail" action="/user/{userId}/email">
+                    <h4>Update Email</h4>
+                    <input type="hidden" name="userId" value="useerId">
+
+                    <div class="inputAlignment">
+                        <label for="userNameForEmail">User Name:</label>
+                        <input type="text" id="userNameForEmail" required>
+                    </div>
+
+                    <div class="inputAlignment">
+                        <label for="emailUpdate">Email:</label>
+                        <input type="text" id="emailUpdate" required>
+                    </div>
+
+                    <button type="submit">Update</button>
+                    <p id="updateEmailMessage"></p>
+                </form>
+
+                <form id="deleteAccount" action="/user/{userId}">
+                    <h4>Delete Account</h4>
+                    <input type="hidden" name="userId" value="userId">
+
+                    <div class="inputAlignment">
+                        <label for="userNameTodelete">User Name:</label>
+                        <input type="text" id="userNameTodelete" required>
+                    </div>
+
+                    <div class="inputAlignment">
+                        <label for="passwordforDeletion">Password:</label>
+                        <input type="text" id="passwordforDeletion" required>
+                    </div>
+
+                    <button type="submit">Delete</button>
+                    <p id="deleteAccountMessage"></p>
+                </form>
+            </main>
+            <button id="logout" class="top-right-button">Logout</button>
+            <button id="dashboard"  class="top-right-button">Dashboard</button>
+        </div>
+        <script src=""></script>      
+    </body>
+</html>
