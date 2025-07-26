@@ -1,4 +1,4 @@
-h1, h2, p#afterRegisterOrLogin {
+h1, h2, p#afterRegisterOrLogin, p#forLogout {
     color: black;
     border:2px solid rgb(5, 85, 93);
     background-color: cadetblue;
@@ -95,7 +95,7 @@ button{
     gap: 15px; /* nice spacing between form and paragraph */
 }
 
-#afterRegisterOrLogin {
+#afterRegisterOrLogin, #forLogout {
     margin: 0; /* remove weird spacing */
     font-weight: bold;
     color: black;
