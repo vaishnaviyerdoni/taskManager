@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My tasks</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <div class="pageWrapper">
+            <header>
+                <h1>Welcome to Task Manager</h1>
+                <h2>Manage you tasks, here!</h2>
+            </header>
+            
+            <div class="formWrapper">
+                <form method="post" action="/task/addtask">
+                    <h4>Add task</h4>
+                    <input type="hidden" value="userId", name="userId">
+                <div class="inputAlignment">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div class="inputAlignment">
+                    <label for="content">Task:</label>
+                    <input type="text" id="content" required>
+                </div>
+
+                <div class="inputAlignment">
+                    <label for="createdAt">Date:</label>
+                    <input type="date" id="createdAt" required>
+                </div>
+
+                <button type="submit">Add task</button>
+                <p id="addTaskMessage"></p>
+            </form>
+            </div>
+        </div>
+        <script src=""></script>
+    </body>
+</html>
