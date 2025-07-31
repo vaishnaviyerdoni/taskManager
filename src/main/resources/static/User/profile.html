@@ -12,9 +12,9 @@
                 <h2>Your Profile</h2>
             </header>
             <main class="taskManager">
-                <form id="updatePassword" action="/user/{userId}/password">
+                <form id="updatePassword">
                     <h4>Update Password</h4>
-                    <input type="hidden" name="userId" value="userId">
+                    <input type="hidden" id="userIdForPassword" name="userId" value="userId">
 
                     <div class="inputAlignment">
                         <label for="userNameForPassword">User Name:</label>
@@ -30,9 +30,9 @@
                     <p id="updatePasswordMessage"></p>
                 </form>
 
-                <form id="updateEmail" action="/user/{userId}/email">
+                <form id="updateEmail">
                     <h4>Update Email</h4>
-                    <input type="hidden" name="userId" value="useerId">
+                    <input type="hidden" name="userId" id="userIDforEmail" value="useerId">
 
                     <div class="inputAlignment">
                         <label for="userNameForEmail">User Name:</label>
@@ -69,6 +69,6 @@
             <button id="logout" class="top-right-button">Logout</button>
             <button id="dashboard"  class="top-right-button">Dashboard</button>
         </div>
-        <script src=""></script>      
+        <script src="profile.js"></script>      
     </body>
 </html>
