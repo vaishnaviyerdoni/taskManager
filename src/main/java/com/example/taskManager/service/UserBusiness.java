@@ -66,7 +66,12 @@ public class UserBusiness {
             
             String user_name = userDAO.getUsernameById(userId);
             int userID = userDAO.getUserIdbyUsername(user_name);
-            if(user_name.equals(userName) && userID == userId){
+
+            System.out.println("DAO returned user_name = " + user_name);
+            System.out.println("DAO returned userID = " + userID);
+
+
+            if(user_name != null && user_name.equals(userName) && userID == userId){
                 return userDAO.updatePasscode(userId, userName, password);
             }
             else{

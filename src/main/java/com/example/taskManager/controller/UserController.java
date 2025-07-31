@@ -87,12 +87,16 @@ public class UserController {
     @PutMapping("user/{userId}/password")
     public ResponseEntity<String> updateMypassword(@PathVariable int userId, @RequestBody PasswordUpdate password) {
         try{
+            System.out.println("Received userId = " + userId);
+            System.out.println("Received username = " + password.getUserName());
+            System.out.println("Received password = " + password.getPassword());
+
             boolean isUpdated = userBusiness.updatePasscode(userId, password);
             if(isUpdated){
                 return ResponseEntity.ok("Password updated!");
             }
             else{
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update Password");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update Password");
             }
         }
         catch(Exception e){
