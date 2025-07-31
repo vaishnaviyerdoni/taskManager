@@ -90,5 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //Delete my account form
 
     const deleteformuserIdStorage = localStorage.getItem("userId");
-    
+    if(deleteformuserIdStorage){
+        document.getElementById("userIdForDelete").value = deleteformuserIdStorage;
+    }
+
+    const deletionForm = document.getElementById("deleteAccount");
+    deletionForm.addEventListener("submit", async(e) => {
+        e.preventDefault();
+    })
 })
