@@ -9,6 +9,8 @@ import com.example.taskManager.model.Task;
 import com.example.taskManager.model.User;
 import com.example.taskManager.repository.TaskDAO;
 import com.example.taskManager.repository.UserDAO;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
@@ -34,7 +36,9 @@ public class TaskBusiness {
             String userName = tasks.getUserName();
             String title = tasks.getTitle();
             String taskContent = tasks.getTaskContent();
-            LocalDateTime createdAt = tasks.getCreatedAt();
+            LocalDate createdAtDate = tasks.getCreatedAt();
+
+            LocalDateTime createdAt = createdAtDate.atStartOfDay();
 
             userID = userDAO.getUserIdbyUsername(userName);
             User user = new User();
