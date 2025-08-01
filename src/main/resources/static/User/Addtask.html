@@ -4,6 +4,7 @@
         <title>Add tasks</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../style.css">
+        <link rel="icon" href="../favicon.ico">
     </head>
     <body>
         <div class="pageWrapper">
@@ -15,25 +16,28 @@
             <div class="formWrapper">
                 <form id="addForm" method="post">
                     <h4>Add task</h4>
+                    
                     <input type="hidden" value="userId" id="userIdfortasks" name="userId">
-                <div class="inputAlignment">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" required>
-                </div>
+                    <input type="hidden" value="userName" id="userNameforTasks" name="userName">
 
-                <div class="inputAlignment">
-                    <label for="content">Task:</label>
-                    <input type="text" id="content" required>
-                </div>
+                    <div class="inputAlignment">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" required>
+                    </div>
 
-                <div class="inputAlignment">
-                    <label for="createdAt">Date:</label>
-                    <input type="date" id="createdAt" required>
-                </div>
+                    <div class="inputAlignment">
+                        <label for="content">Task:</label>
+                        <input type="text" id="content" required>
+                    </div>
 
-                <button type="submit">Add task</button>
-                <p id="addTaskMessage"></p>
-            </form>
+                    <div class="inputAlignment">
+                        <label for="createdAt">Date:</label>
+                        <input type="date" id="createdAt" required>
+                    </div>
+
+                    <button type="submit">Add task</button>
+                    <p id="addTaskMessage"></p>
+                </form>
             </div>
             <button id="dashboard" class="top-right-button">Dashboard</button>
         </div>
