@@ -1,6 +1,6 @@
 package com.example.taskManager.DTO.TaskDTO;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,6 @@ public class AddTask {
     private int userId;
     private String title;
     private String taskContent;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     private String userName;
 }
