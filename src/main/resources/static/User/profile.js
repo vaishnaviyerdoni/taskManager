@@ -97,5 +97,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const deletionForm = document.getElementById("deleteAccount");
     deletionForm.addEventListener("submit", async(e) => {
         e.preventDefault();
+
+        const userId = document.getElementById("userIdForDelete").value.trim();
+        const userName = document.getElementById("userNameTodelete").value.trim();
+        const password = document.getElementById("passwordforDeletion").value.trim();
+
+        console.log("Information  received is: ", userId, userName, password);
+ 
+        try{
+            const res = await fetch(`/api/user/${userId}?userName=${encodeURIComponent(userName)}&password=${encodeURIComponent(password)}`, {
+                method : "DELETE"
+            });
+
+            const result = await res.text();
+
+            if(res.ok){
+                alert(result);
+            }
+            else{
+                console.log("Server response: ", result);
+                document.getElementById("deleteAccountMeessage").innerText = result;
+            }
+        }
+        catch(error){
+            console.log("Server response: ", error);
+            document.getElementById("deleteAccountMessage").innerText = "Server error, try again later";
+        }
     })
+
+    const BtntoDashboard = document.getElementById("dashboard");
+    if(BtntoDashboard){
+        BtntoDashboard.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        })
+    }
+
+    const BtntoLogout = document.getElementById("logout");
+    if(BtntoLogout){
+        BtntoLogout.addEventListener("click", () => {
+            window.location.href = "logout.html";
+        })
+    }
 })
