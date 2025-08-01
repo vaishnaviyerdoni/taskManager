@@ -13,9 +13,9 @@
             </header>
             
             <div class="formWrapper">
-                <form method="post" action="/task/addtask">
+                <form id="addForm" method="post">
                     <h4>Add task</h4>
-                    <input type="hidden" value="userId", name="userId">
+                    <input type="hidden" value="userId" id="userIdfortasks" name="userId">
                 <div class="inputAlignment">
                     <label for="title">Title:</label>
                     <input type="text" id="title" required>
@@ -35,7 +35,8 @@
                 <p id="addTaskMessage"></p>
             </form>
             </div>
+            <button id="dashboard" class="top-right-button">Dashboard</button>
         </div>
-        <script src=""></script>
+        <script src="Addtask.js"></script>
     </body>
 </html>
