@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             else{
                 console.log("Server response: ", result);
-                document.getElementById("deleteAccountMeessage").innerText = result;
+                document.getElementById("deleteAccountMessage").innerText = result;
             }
         }
         catch(error){
