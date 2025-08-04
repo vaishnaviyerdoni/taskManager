@@ -6,13 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const action = params.get("action");
     const taskID = params.get("taskId");
 
+    document.querySelector(".updateForm").style.display = "none";
+    document.querySelector(".deleteForm").style.display = "none";
+
+
     if(action === "update"){
         document.querySelector(".updateForm").style.display = "block";
         document.getElementById("taskIdForupdate").value = taskID;
     }
     else if(action === "delete"){
         document.querySelector(".deleteForm").style.display = "block";
-        document.getElementById("taskIdForupdate").value = taskID;
+        document.getElementById("taskId").value = taskID;
     }
 
     const userNamefromStorage = localStorage.getItem("userName");
@@ -37,13 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Received Information is: ", userId, userName, taskId, taskID, taskContent);
 
         try{
-            const res = await fetch(`/api/task/${userId}`, {
+            const res = await fetch(`/api/task/${taskId}`, {
                 method : "PUT",
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify({
                     taskId,
                     userName,
-                    taskContent
+                    taskContent,
+                    userId
                 })
             })
 
