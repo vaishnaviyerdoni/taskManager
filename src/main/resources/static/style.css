@@ -31,7 +31,7 @@ form{
     align-items: center;
     padding:20px;
     border-radius: 10px;
-    max-width: 400px;
+    max-width: none;
     border: 2px solid rgb(5, 86, 93);
     margin:auto;
 }
@@ -123,4 +123,9 @@ button{
 #dashboard {
     top: 15px;
     right: 15px;
+}
+
+.updateForm,
+.deleteForm {
+    display: none;
 }
