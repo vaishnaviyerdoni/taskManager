@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Manage tasks</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+        <link rel="icon" href = "../favicon.ico">
+    </head>
+
+    <body>
+        <main class="pageWrapper">
+            <div class="taskManager">
+                <form id="myUpdateForm" class="formWrapper updateForm">
+                    <h4>Update Task</h4>
+                    <input type="hidden" value="userId" name="userId" id="userIdForUpdate">
+                    <input type="hidden" value="taskId" name="taskId" id="taskIdForupdate">
+                    <input type="hidden" value="userName" name="userName" id="userNameforUpdate">
+
+                    <div class="inputAlignment">
+                        <label for="taskContent">Task:</label>
+                        <input type="text" id="taskContent" required>
+                    </div>
+
+                    <button type="submit">Update task</button>
+                    <p id="updateMessage"></p>
+                </form>
+
+                <form id="myDeleteForm" class="formWrapper deleteForm">
+                    <h4>Delete task</h4>
+                    <h4>Are you sure about deleting task?</h4>
+                    <input type="hidden" value="userId" name="userId" id="userID">
+                    <input type="hidden" value="taskId" name="taskId" id="taskId">
+                    <input type="hidden" value="userName" name="userName" id="userName">
+
+                    <div class="inputAlignment">
+                        <label for="confirmation">Confirm</label>
+                        <input type="text" id="confirmation" required>
+                    </div>
+
+                    <button type="submit">Confirm</button>
+                    <p id="confirmationMessage"></p>
+                </form>
+            </div>
+        </main>
+        <script src="updateNdeleteTask.js"></script>
+        <button class="top-right-button" id="dashboard">Dashboard</button>
+    </body>
+</html>
