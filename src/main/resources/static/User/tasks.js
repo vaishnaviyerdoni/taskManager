@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                               <th>Title</th>
                               <th>Task</th>
                               <th>Date</th>
+                              <th>Actions</th>
                             </tr>
                           </thead>
                         <tbody>
@@ -40,6 +41,10 @@ document.addEventListener("DOMContentLoaded", async() => {
                             <td>${data.title}</td>
                             <td>${data.taskContent}</td>
                             <td>${data.createdAt}</td>  
+                            <td>
+                                <button class="updateTaskBtn" data-taskid="${data.taskId}">Update</button>
+                                <button class="deleteTaskBtn" data-taskid="${data.taskId}">Delete</button>
+                            </td>
                         </tr>  
                     `;
                 });
@@ -47,6 +52,33 @@ document.addEventListener("DOMContentLoaded", async() => {
                 table += "</tbody></table>";
                 console.log("table exists ?", document.getElementById("taskTable"));
                 document.getElementById("taskTable").innerHTML = table;
+
+                document.getElementById("taskTable").addEventListener("click", (event) => {
+                    event.preventDefault();
+                    const target = event.target;
+                    
+                    //When update is clicked
+                    if(target.classList.contains("updateTaskBtn")){
+                        const taskId = target.dataset.taskid;
+
+                        console.log("Clicked element:", target);
+                        console.log("Task ID from dataset:", target.dataset.taskid);
+
+
+                        window.location.href = `updateNdeleteTask.html?action=update&taskId=${taskId}`;
+                    }
+
+                    //When delete is clicked
+                    if(target.classList.contains("deleteTaskBtn")){
+                        const taskId = target.dataset.taskid;
+
+                        console.log("Clicked element:", target);
+                        console.log("Task ID from dataset:", target.dataset.taskid);
+
+
+                        window.location.href = `updateNdeleteTask.html?action=delete&taskId=${taskId}`;
+                    }
+                })
             }
         }
         else{
@@ -59,5 +91,11 @@ document.addEventListener("DOMContentLoaded", async() => {
         console.log("Server response: ", error);
         document.getElementById("tasksMessage").innerText = "Server Error, try again later!";
     }
-    
+
+    const BtntoDashboard = document.getElementById("dashboard");
+    if(BtntoDashboard){
+        BtntoDashboard.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        })
+    }
 })
