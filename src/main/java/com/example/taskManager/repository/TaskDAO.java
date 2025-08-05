@@ -121,6 +121,19 @@ public class TaskDAO {
         }
     }
 
+    @SuppressWarnings("null")
+    public boolean doesUserOwnTask(int taskId, int userId) {
+        String sql = "SELECT COUNT(*) FROM tasks WHERE taskId = ? AND userId = ?";
+        try{
+            Integer count = jdbc.queryForObject(sql, Integer.class, taskId, userId);
+            return count == 1;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //UPDATE method : to update the task
     public boolean updateTask(String taskContent, int taskId) {
         String sql = "UPDATE tasks SET taskContent = ? WHERE taskId = ?";
