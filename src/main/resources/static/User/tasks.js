@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                         console.log("Clicked element:", target);
                         console.log("Task ID from dataset:", target.dataset.taskid);
 
-                        window.location.href = `notes.html?action=post&taskId=${taskId}`;
+                        window.location.href = `addNotes.html?action=get&taskId=${taskId}`;
                     }
 
                     //When view notes is clicked 
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                         console.log("Clicked Element:", target);
                         console.log("Task ID from dataset:", target.dataset.taskid);
 
-                        window.location.href = `viewNotes.html?action=get&taskId=${taskId}`;
+                        window.location.href = `Notes.html?action=post&taskId=${taskId}`;
                     }
                 })
             }
