@@ -107,16 +107,13 @@ public class TaskBusiness {
             int userId = task.getUserId();
             String newContent = task.getTaskContent();
 
-            int userID = userDAO.getUserIdbyUsername(userName);
-            int taskID = taskDAO.getTaskIdbyuserId(userID);
-
-            if(taskId == taskID && userID == userId){
-                boolean isUpdated = taskDAO.updateTask(newContent, taskID);
-                return isUpdated;
+            boolean owns = taskDAO.doesUserOwnTask(taskId, userId);
+            if(owns){
+                return taskDAO.updateTask(newContent, taskId);
             }
             else{
-                throw new UserNotfoundException("User for the given userID not found");
-            }
+                throw new UserNotfoundException("This task does not belong given user!");
+            }    
         }
         catch(Exception e){
             e.printStackTrace();
