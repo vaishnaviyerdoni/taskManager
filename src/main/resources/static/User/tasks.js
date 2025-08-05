@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                               <th>Task</th>
                               <th>Date</th>
                               <th>Actions</th>
+                              <th>Notes</th>
                             </tr>
                           </thead>
                         <tbody>
@@ -44,6 +45,10 @@ document.addEventListener("DOMContentLoaded", async() => {
                             <td>
                                 <button class="updateTaskBtn" data-taskid="${data.taskId}">Update</button>
                                 <button class="deleteTaskBtn" data-taskid="${data.taskId}">Delete</button>
+                            </td>
+                            <td>
+                                <button class="addNotes" data-taskid="${data.taskId}">+ Add Notes</button>
+                                <button class="viewNotes" data-taskid="${data.taskId}">View Notes</button>
                             </td>
                         </tr>  
                     `;
@@ -77,6 +82,26 @@ document.addEventListener("DOMContentLoaded", async() => {
 
 
                         window.location.href = `updateNdeleteTask.html?action=delete&taskId=${taskId}`;
+                    }
+
+                    //When +Add notes is clicked
+                    if(target.classList.contains("addNotes")){
+                        const taskId = target.dataset.taskid;
+
+                        console.log("Clicked element:", target);
+                        console.log("Task ID from dataset:", target.dataset.taskid);
+
+                        window.location.href = `notes.html?action=post&taskId=${taskId}`;
+                    }
+
+                    //When view notes is clicked 
+                    if(target.classList.contains("viewNotes")){
+                        const taskId = target.dataset.taskid;
+
+                        console.log("Clicked Element:", target);
+                        console.log("Task ID from dataset:", target.dataset.taskid);
+
+                        window.location.href = `viewNotes.html?action=get&taskId=${taskId}`;
                     }
                 })
             }
