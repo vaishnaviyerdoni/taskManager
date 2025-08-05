@@ -126,11 +126,15 @@ public class TaskBusiness {
     public boolean deleteMytask(int taskId, int userId, String userName){
         try{
             int userID = userDAO.getUserIdbyUsername(userName);
-            int taskID = taskDAO.getTaskIdbyuserId(userID);
 
-            if(taskId == taskID && userID == userId){
-                boolean isDeleted = taskDAO.deleteTask(taskID);
-                return isDeleted;
+            if(userID != userId){
+                throw new UserNotfoundException("Username and userId do not match");
+            }
+        
+            boolean owns = taskDAO.doesUserOwnTask(taskId, userID);
+
+            if(owns){
+                return taskDAO.deleteTask(taskId);
             }
             else{
                 throw new UserNotfoundException("User for the given userID not found");
@@ -142,5 +146,4 @@ public class TaskBusiness {
             return false;
         }
     }
-
 }
