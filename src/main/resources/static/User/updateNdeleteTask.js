@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 method : "PUT",
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify({
-                    taskId,
                     userName,
                     taskContent,
                     userId
@@ -67,6 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Server response: ", error);
             document.getElementById("updateMessage").innerText = "Server Error, try again later";
         }
-
     })
+
+    const BtntoDashboard = document.getElementById("dashboard");
+    if(BtntoDashboard){
+        BtntoDashboard.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        })
+    }
 })
