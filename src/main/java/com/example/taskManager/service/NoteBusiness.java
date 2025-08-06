@@ -11,6 +11,8 @@ import com.example.taskManager.model.User;
 import com.example.taskManager.repository.NoteDAO;
 import com.example.taskManager.repository.TaskDAO;
 import com.example.taskManager.repository.UserDAO;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +38,9 @@ public class NoteBusiness {
             int userId = note.getUserId();
             int taskId = note.getTaskId();
             String content = note.getContent();
-            LocalDateTime createdAt = note.getCreatedAt();
+            LocalDate createdAtDate = note.getCreatedAt();
+
+            LocalDateTime createdAt = createdAtDate.atStartOfDay();
 
             int userID = userDAO.getUserIdbyUsername(userName);
             int taskID = taskDAO.getTaskIdbyuserId(userID);

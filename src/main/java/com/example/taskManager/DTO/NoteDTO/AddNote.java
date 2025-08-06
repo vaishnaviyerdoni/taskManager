@@ -1,6 +1,6 @@
 package com.example.taskManager.DTO.NoteDTO;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ public class AddNote {
     private int taskId;
     private int userId;
     private String content;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 }
