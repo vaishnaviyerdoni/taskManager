@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My notes</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+        <link rel="icon" href="../favicon.ico">
+    </head>
+
+    <body>
+        <main class="pageWrapper">
+            <form id="noteForm" class="formWrapper" method="post">
+                <h4>Add Note</h4>
+                <input type="hidden" name="userId" value="userId" id="userId">
+                <input type="hidden" name="userName" value="userName" id="userName">
+                <input type="hidden" name="taskId" value="taskId" id="taskId">
+
+                <div class="inputAlignment">
+                    <label for="content">Note:</label>
+                    <input type="text" id="content" required>
+                </div>
+
+                <div class="inputAlignment">
+                    <label for="createdAt">Date:</label>
+                    <input type="date" id="createdAt" required>
+                </div>
+
+                <button type="submit">Add</button>
+                <p id="noteMessage"></p>
+            </form>
+        </main>
+        <script src="addNotes.js"></script>
+        <button class="top-right-button" id="dashboard">Dashboard</button>
+    </body>
+</html>
