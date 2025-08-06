@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", async() => {
                             <td>${data.content}</td>
                             <td>${data.createdAt}</td>
                             <td>
-                                <button class="updateNoteBtn" data-taskid="${data.taskId}">Update</button>
-                                <button class="deleteNoteBtn" data-taskid="${data.taskId}">Delete</button>
+                                <button class="updateNoteBtn" data-taskid="${data.task.taskId}" data-notesid="${data.notesId}">Update</button>
+                                <button class="deleteNoteBtn" data-taskid="${data.task.taskId}" data-notesid="${data.notesId}">Delete</button>
                             </td>
                         </tr>
                     `;
@@ -65,20 +65,26 @@ document.addEventListener("DOMContentLoaded", async() => {
                     if(target.classList.contains("updateNoteBtn")){
                         const taskId = target.dataset.taskid;
 
+                        const notesId = target.dataset.notesid;
+
                         console.log("Clicked element:", target);
                         console.log("Task ID from dataset:", target.dataset.taskid);
+                        console.log("Notes ID from dataset:", target.dataset.notesid);
                     
-                        window.location.href = `updateNdelete.html?action=update&taskId=${taskId}`;
+                        window.location.href = `updateNdelete.html?action=update&taskId=${taskId}&notesId=${notesId}`;
                     }
 
                     //When delete is clicked
                     if(target.classList.contains("deleteNoteBtn")){
                         const taskId = target.dataset.taskid;
 
+                        const notesId = target.dataset.notesid;
+
                         console.log("Clicked element:", target);
                         console.log("Task ID from dataset:", target.dataset.taskid);
+                        console.log("Notes ID from dataset:", target.dataset.notesid)
                     
-                    window.location.href = `updateNdelete.html?action=delete&taskId=${taskId}`;
+                    window.location.href = `updateNdelete.html?action=delete&taskId=${taskId}&notesId=${notesId}`;
                     }
                 })
             }          
