@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const userName = document.getElementById("userNameforTasks").value.trim();
 
         console.log("Received Information: ", userId, title, taskContent, createdAt, userName);
-
         try{
             const res = await fetch("/api/task/addtask", {
                 method : "POST",
