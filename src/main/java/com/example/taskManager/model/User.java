@@ -23,7 +23,6 @@ public class User {
     @JsonIgnore
     private String password;
     
-
     //empty constructor
     public User(){}
     
