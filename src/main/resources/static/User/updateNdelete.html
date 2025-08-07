@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>Update and delete notes</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+        <link rel="icon" href="../favicon.ico">
+    </head>
+
+    <body>
+        <main class="pageWrapper">
+            <div class="taskManager">
+                <form class="formWrapper updateForm" id="myUpdateForm">
+                    <h4>Update your Note!</h4>
+                    <input type="hidden" value="userId" name="userId" id="updateUserId">
+                    <input type="hidden" value="taskId" name="taskId" id="updateTaskId">
+                    <input type="hidden" value="notesId" name="notesId" id="updateNotesId">
+                    <input type="hidden" value="userName" name="userName" id="updateUserName">
+
+                    <div class="inputAlignment">
+                        <label for="content">Note:</label>
+                        <input type="text" id="content" required>
+                    </div>
+
+                    <button type="submit">update</button>
+                    <p id="updateMessage"></p>
+                </form>
+
+                <form class="formWrapper deleteForm" id="myDeleteForm">
+                    <h4>Delete Task</h4>
+                    <h4>Are you sure about deleting note?</h4>
+
+                    <input type="hidden" value="userId" name="userId" id="deleteUserId">
+                    <input type="hidden" value="taskId" name="taskId" id="deleteTaskId">
+                    <input type="hidden" value="notesId" name="notesId" id="deleteNotesId">
+                    <input type="hidden" value="userName" name="userName" id="deleteUserName">
+
+
+                    <button type="submit">Confirm</button>
+                    <p id="confirmationMessage"></p>
+                </form>
+            </div>
+        </main>
+        <script src="updateNdelete.js"></script>
+        <button class="top-right-button" id="dashboard">Dashboard</button>
+        <button id="logout" class="top-right-button">Back to Notes</button>
+    </body>
+</html>
