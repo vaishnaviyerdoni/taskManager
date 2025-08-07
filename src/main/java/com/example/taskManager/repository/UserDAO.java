@@ -141,7 +141,8 @@ public class UserDAO {
             return "Email not found";
         }
     }
-
+    
+    //To check if user owns the task
     public int getUserIdbyUsername(String username){
         String sql = "SELECT userId FROM users WHERE userName = ?";
         try{
