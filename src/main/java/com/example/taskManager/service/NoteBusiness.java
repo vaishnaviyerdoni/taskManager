@@ -95,14 +95,13 @@ public class NoteBusiness {
             int taskId = noteContent.getTaskId();
             int userId = noteContent.getUserId();
 
-            int userID = userDAO.getUserIdbyUsername(userName);
-            int taskID = taskDAO.getTaskIdbyuserId(userID);
-            if(taskId == taskID && userID == userId){
-                boolean isUpdated = noteDAO.updateNotes(notesId, content);
-                return isUpdated;
+            
+            boolean owns = noteDAO.doesUserOwnNote(userId, taskId, notesId);
+            if(owns){
+                return noteDAO.updateNotes(notesId, content);
             }
             else{
-                throw new UserNotfoundException("User for given userID is not available");
+                throw new UserNotfoundException("The note does not belong to given user");
             }
         }
         catch(Exception e){
@@ -115,13 +114,12 @@ public class NoteBusiness {
     //delete a note for the task
     public boolean deleteMyNote(int userId, int taskId, String userName, int notesId){
         try{
-            int userID = userDAO.getUserIdbyUsername(userName);
-            int taskID = taskDAO.getTaskIdbyuserId(userID);
-            if(taskID == taskId && userID == userId){
+            boolean owns = noteDAO.doesUserOwnNote(userId, taskId, notesId);
+            if(owns){
                 return noteDAO.deleteNote(notesId);
             }
             else{
-                throw new UserNotfoundException("User for this userID was unavailable");
+                throw new UserNotfoundException("The note does not belong to given user");
             }
         }
         catch(Exception e){

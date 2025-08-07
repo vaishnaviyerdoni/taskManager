@@ -109,6 +109,19 @@ public class NoteDAO{
         }
     }
 
+    @SuppressWarnings("null")
+    public boolean doesUserOwnNote(int userId, int taskId, int notesId) {
+        String sql = "SELECT COUNT(*) FROM notes WHERE taskId = ? AND notesId = ? AND userId = ?";
+        try{
+            Integer count = jdbc.queryForObject(sql, Integer.class, taskId, notesId, userId);
+            return count == 1;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //UPDATE method: to update the note for a specfic task
     public boolean updateNotes(int notesId, String content) {
         String sql = "UPDATE notes SET content = ? WHERE notesId = ?";
