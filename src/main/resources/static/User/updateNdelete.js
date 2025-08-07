@@ -80,6 +80,55 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    //Delete Note logic
+    const useriD = localStorage.getItem("userId");
+    if(useriD){
+        document.getElementById("deleteUserId").value = useriD;
+    }
+    const UserName = localStorage.getItem("userName");
+    if(UserName){
+        document.getElementById("deleteUserName").value = UserName;
+    }
+
+    const deleteForm = document.getElementById("myDeleteForm");
+    deleteForm.addEventListener("submit", async(e) => {
+        e.preventDefault();
+
+        const userId = document.getElementById("deleteUserId").value.trim();
+        const userName = document.getElementById("deleteUserName").value.trim();
+        const notesId = document.getElementById("deleteNotesId").value.trim();
+        const taskId = document.getElementById("deleteTaskId").value.trim();
+
+        console.log("Sending update:", {
+            notesId,
+            userId,
+            taskId,
+            userName
+        });
+
+        try{
+            const res = await fetch(`/api/note/${notesId}?userId=${encodeURIComponent(userId)}&taskId=${encodeURIComponent(taskId)}&userName=${userName}`, {
+                method : "DELETE"
+            });
+
+            const result = await res.text();
+            if(res.ok){
+                alert(result);
+                setTimeout(() => {
+                    window.location.href = "Notes.html?taskId=" + taskId;
+                }, 3000);
+            }
+            else{
+                console.log("Server response: ", result);
+                document.getElementById("confirmationMessage").innerText = result;
+            }
+        }
+        catch(error){
+            console.log("Server response: ", error);
+            document.getElementById("confirmationMessage").innerText = "Server Error, try again later!";
+        }
+    })
+
     //Buttons to go to dashboard and view Notes
     const BtntoDashboard = document.getElementById("dashboard");
     if(BtntoDashboard){
