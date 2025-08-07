@@ -2,7 +2,6 @@ package com.example.taskManager.service;
 
 import org.slf4j.*;
 import org.springframework.stereotype.Service;
-
 import com.example.taskManager.DTO.UserDTO.AddUser;
 import com.example.taskManager.DTO.UserDTO.EmailUpdate;
 import com.example.taskManager.DTO.UserDTO.Login;
