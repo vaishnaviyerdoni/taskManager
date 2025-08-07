@@ -61,4 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("notesMessage").innerText = "Server Error, try again!";
         }
     })
+
+    //Buttons to go to dashboard and view Notes
+    const BtntoDashboard = document.getElementById("dashboard");
+    if(BtntoDashboard){
+        BtntoDashboard.addEventListener("click", () => {
+            window.location.href = "dashboard.html";
+        })
+    }
 })
