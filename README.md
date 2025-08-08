@@ -48,13 +48,15 @@ The Application focuses on enabling users to manage their daily tasks. Users can
 
 
 ## File Structure
-src/main/java/com/taskManager
+--src/main/java/com/taskManager
 - /service           ---Business Logic
 - /controller        ---RESTful API endpoints
 - /repository        ---CRUD operations
 - /Exceptions        ---Custom Written Exceptions
 - /model             ---POJO Classes
-src/main/resources/static
+
+
+--src/main/resources/static
 - /Image             ---Background Image for Webpage
 - favicon            ---favicon for webpage
 - style.css          ---stylesheet
