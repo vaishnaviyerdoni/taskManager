@@ -22,7 +22,7 @@ It is built using Spring Boot for Backend, SQL Server for Database and HTML, CSS
 
 
 ## Introduction
-**Task Manager** is a personal productivity web Application that allows users ti manage their tasks. Users can also add notes to any of their tasks for additional information.
+**Task Manager** is a personal productivity web Application that allows users to manage their tasks. Users can also add notes to any of their tasks for additional information.
 
 The application is built in RESTful backend using *Java Programming Language* and *Springboot*, *SQL Server Database* was used for data storage and Frontend is built using HTML, CSS and JavaScript.
 
@@ -33,6 +33,16 @@ The Application focuses on enabling users to manage their daily tasks. Users can
 - **Database:** SQL Server
 - **Frontend:** HTML, CSS, JavaScript
 - **Tools:** Postman(API testing), Maven(Build Tool)
+## Database Schema
+
+The database structure is defined in the `Database/taskManager.sql` file.  
+It includes three tables:
+- `users`: Stores user information.
+- `tasks`: Stores tasks created by users.
+- `notes`: Stores notes related to tasks.
+
+You can execute the script in SQL Server to initialize the database.
+
 ## Features
 
 - User Registration and User Authentication
@@ -77,7 +87,7 @@ http://localhost:8080/user/Register.html
 ```bash
 http://localhost:8080/user/Login.html
 ```
-7. You're ready to use the System!
+7. You're ready to use the Task Manager!
 
     
 ## Usage
