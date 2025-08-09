@@ -140,7 +140,7 @@ You can also view, add, delete or update the notes associated with any of the ta
 
 #### 1.) Favicon
 
-The favicon for the project was generated using the following favicon generated.
+The favicon for the project was generated using the following favicon generator.
 
 ```http
     https://favicon.io/favicon-generator/
