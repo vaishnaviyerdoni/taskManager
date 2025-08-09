@@ -71,7 +71,8 @@ You can execute the script in SQL Server to initialize the database.
 - favicon            ---favicon for webpage
 - style.css          ---stylesheet
 - /user              ---HTML and JavaScript
-/Database            ---taskManager.sql (DB Schema)
+
+--/Database            ---taskManager.sql (DB Schema)
 
 ## Installation Instructions
 
