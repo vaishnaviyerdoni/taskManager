@@ -84,7 +84,7 @@ You can execute the script in SQL Server to initialize the database.
 ```bash
 http://localhost:8080/user/Register.html
 ```
-6 Once successfully registered, you'll be redirected to login page and you can login to begin using the taskManager!
+6. Once successfully registered, you'll be redirected to login page and you can login to begin using the taskManager!
 ```bash
 http://localhost:8080/user/Login.html
 ```
